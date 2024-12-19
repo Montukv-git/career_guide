@@ -19,11 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 env = environ.Env()
 environ.Env.read_env()
 
-SECRET_KEY="5ca)l1(y3tql5g=9_fl(&3c0k2lz4q_-!s6rtyk9d)zadl6%(j"
 DEBUG = env.bool('DEBUG', default=True)
 
-#OPENAI_API_KEY = env('OPENAI_API_KEY')
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = env('OPENAI_API_KEY')
 
 print(OPENAI_API_KEY)
 ALLOWED_HOSTS = []
