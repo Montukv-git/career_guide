@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guide</title>
+</head>
+<body>
+    <h1>Career Path Guide</h1>
+
+    <form method="POST" action="{% url 'get-roadmap' %}">
+        {% csrf_token %}
+        <label for="career">Career Path:</label>
+        <input type="text" id="career" name="career" required>
+        <button type="submit">Get Roadmap</button>
+    </form>
+    
+    
+
+    <div id="result">
+        <h2>Career Roadmap</h2>
+        <pre id="roadmap"></pre>
+    </div>
+
+    <script>
+        var csrfToken = '{{ csrf_token }}';  
+        document.getElementById('careerForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const career = document.getElementById('career').value;
+
+            const response = await fetch('/get-roadmap/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({career}),
+            });
+
+            const data = await response.json();
+
+            if (data.roadmap) {
+                document.getElementById('roadmap').textContent = data.roadmap;
+            } else {
+                document.getElementById('roadmap').textContent = "Error: " + data.error;
+            }
+        });
+    </script>
+</body>
+</html>
