@@ -52,3 +52,4 @@ def get_roadmap(request):
             return JsonResponse({"error": f"Unexpected error: {str(e)}"}, status=500)
 
     return JsonResponse({"error": "Invalid request method"}, status=405)
+#test
